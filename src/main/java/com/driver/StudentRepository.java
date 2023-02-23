@@ -52,22 +52,22 @@ public class StudentRepository {
     }
 
     public void deleteTeacherByName(String teacher) {
-        teacherMap.remove(teacher);
+
         List<String> students=new ArrayList<>();
         if(teacherMapsStudent.containsKey(teacher)){
             students=teacherMapsStudent.get(teacher);
             for(String student:students){
                 if(studentMap.containsKey(student)) studentMap.remove(student);
             }
-
-            teacherMapsStudent.remove(teacher);
         }
+        teacherMapsStudent.remove(teacher);
+
+        if(teacherMap.containsKey(teacher)) teacherMap.remove(teacher);
 
     }
 
     public void deleteAllTeachers() {
 
-        teacherMap.clear();
         List<String> students=new ArrayList<>();
         for(String teacher:teacherMapsStudent.keySet()){
             students=teacherMapsStudent.get(teacher);
@@ -76,5 +76,6 @@ public class StudentRepository {
             }
         }
         teacherMapsStudent.clear();
+        teacherMap.clear();
     }
 }
