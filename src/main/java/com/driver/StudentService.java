@@ -46,4 +46,16 @@ public class StudentService {
     public void deleteAllTeachers() {
         studentRepository.deleteAllTeachers();
     }
+
+    public List<String> getAllTeachers() {
+        return studentRepository.getAllTeachers();
+    }
+
+    public List<List<String>> getMaps() {
+        return studentRepository.getMaps();
+    }
+
+    public List<String> getMappedTeachers() {
+        return studentRepository.getMappedTeachers();
+    }
 }

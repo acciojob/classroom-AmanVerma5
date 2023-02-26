@@ -1,5 +1,6 @@
 package com.driver;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class StudentController {
         return new ResponseEntity<>("New teacher added successfully", HttpStatus.CREATED);
     }
 
-    @PutMapping("/add-student-teacher-pair")
+    @PutMapping ("/add-student-teacher-pair")
     public ResponseEntity<String> addStudentTeacherPair(@RequestParam String student, @RequestParam String teacher){
         studentService.addStudentTeacherPair(student,teacher);
         return new ResponseEntity<>("New student-teacher pair added successfully", HttpStatus.CREATED);
@@ -72,5 +73,24 @@ public class StudentController {
     public ResponseEntity<String> deleteAllTeachers(){
         studentService.deleteAllTeachers();
         return new ResponseEntity<>("All teachers deleted successfully", HttpStatus.CREATED);
+    }
+
+    @GetMapping("/get-all-teachers")
+    public ResponseEntity<List<String>> getAllTeachers(){
+        List<String> teachers=studentService.getAllTeachers();
+        return new ResponseEntity<>(teachers,HttpStatus.CREATED);
+    }
+
+    @GetMapping("/get-maps")
+    public ResponseEntity<List<List<String>>> getMaps(){
+        List<List<String>> ans=new ArrayList<>();
+        ans=studentService.getMaps();
+        return new ResponseEntity<>(ans,HttpStatus.FOUND);
+    }
+
+    @GetMapping("/get-mapped-teachers")
+    public ResponseEntity<List<String>> getMappedTeachers(){
+        List<String> map=studentService.getMappedTeachers();
+        return new ResponseEntity<>(map,HttpStatus.FOUND);
     }
 }

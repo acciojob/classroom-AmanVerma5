@@ -27,7 +27,9 @@ public class StudentRepository {
     }
 
     public void addStudentTeacherPair(String student, String teacher) {
-        if(studentMap.containsKey(student)&& studentMap.containsKey(teacher)){
+        if(studentMap.containsKey(student) && studentMap.containsKey(teacher)){
+            studentMap.put(student,studentMap.get(student));
+            teacherMap.put(teacher,teacherMap.get(teacher));
             List<String> currentStudent=new ArrayList<>();
             if(teacherMapsStudent.containsKey(teacher)) currentStudent=teacherMapsStudent.get(teacher);
             currentStudent.add(student);
@@ -44,7 +46,9 @@ public class StudentRepository {
     }
 
     public List<String> getStudentsByTeacherName(String teacher) {
-        return teacherMapsStudent.get(teacher);
+        List<String> ans=new ArrayList<>();
+        ans=teacherMapsStudent.get(teacher);
+        return ans;
     }
 
     public List<String> getAllStudents() {
@@ -77,5 +81,23 @@ public class StudentRepository {
         }
         teacherMapsStudent.clear();
         teacherMap.clear();
+    }
+
+    public List<String> getAllTeachers() {
+        return new ArrayList<>(teacherMap.keySet());
+    }
+
+    public List<List<String>> getMaps() {
+        List<List<String>> ans=new ArrayList<>();
+        List<String> curr=new ArrayList<>();
+        for(String x:teacherMapsStudent.keySet()){
+            curr=teacherMapsStudent.get(x);
+            ans.add(curr);
+        }
+        return ans;
+    }
+
+    public List<String> getMappedTeachers() {
+        return new ArrayList<>(teacherMapsStudent.keySet());
     }
 }
