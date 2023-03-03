@@ -27,14 +27,10 @@ public class StudentRepository {
     }
 
     public void addStudentTeacherPair(String student, String teacher) {
-        if(studentMap.containsKey(student) && studentMap.containsKey(teacher)){
-            studentMap.put(student,studentMap.get(student));
-            teacherMap.put(teacher,teacherMap.get(teacher));
-            List<String> currentStudent=new ArrayList<>();
-            if(teacherMapsStudent.containsKey(teacher)) currentStudent=teacherMapsStudent.get(teacher);
-            currentStudent.add(student);
-            teacherMapsStudent.put(teacher,currentStudent);
-        }
+        List<String> teacherList=new ArrayList<>();
+        if(teacherMapsStudent.containsKey(teacher)) teacherList=teacherMapsStudent.get(teacher);
+        teacherList.add(student);
+        teacherMapsStudent.put(teacher,teacherList);
     }
 
     public Student getStudentByName(String student) {
